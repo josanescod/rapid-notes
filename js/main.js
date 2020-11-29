@@ -1,5 +1,5 @@
 const form = document.querySelector('form');
-const ul = document.querySelector ('ul');
+const ul = document.querySelector('ul');
 const button = document.querySelector('button');
 const input = document.querySelector('#item');
 
@@ -12,7 +12,7 @@ const data = JSON.parse(localStorage.getItem('items'));
 const liMaker = (text) => {
     const li = document.createElement('li');
     li.textContent = text;
-    ul.appendChild (li);
+    ul.appendChild(li);
 }
 
 /*let items
@@ -22,27 +22,28 @@ if (localStorage.getItem('items')) {
 else {
     items = {}
 }*/
+showItems();
 
-
-
-form.addEventListener('submit',function(e) {
+form.addEventListener('submit', function (e) {
     e.preventDefault();
     itemsArray.push(input.value);
-    localStorage.setItem('items',JSON.stringify(itemsArray));
+    localStorage.setItem('items', JSON.stringify(itemsArray));
 
-    data.forEach((item)=>{
-        liMaker(item);
-    })
-
-
+    showItems();
 
     liMaker(input.value);
-    input.value='';
+    input.value = '';
 })
 
-button.addEventListener('click',function(){
+button.addEventListener('click', function () {
     localStorage.clear();
-    while(ul.firstChild){
+    while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
     }
 })
+
+function showItems(){
+    data.forEach((item) => {
+        liMaker(item);
+    })
+}
